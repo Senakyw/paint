@@ -3,7 +3,6 @@ import java.awt.*;
 
 abstract public class Figure {
 
-    protected int width =0, lenght = 0;
     private Color c;
     private Point p;
 
@@ -27,9 +26,7 @@ abstract public class Figure {
     @Override
     public String toString() {
         return "Figure{" +
-                "width=" + width +
-                ", lenght=" + lenght +
-                ", c=" + c +
+                "c=" + c +
                 ", p=" + p +
                 '}';
     }

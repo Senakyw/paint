@@ -3,7 +3,7 @@ package paint;
 import java.awt.*;
 
 public class Rectangle extends Figure {
-
+    protected int width =0, lenght = 0;
 
     public Rectangle(Color c, Point p) {
         super(c, p);
