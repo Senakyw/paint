@@ -1,18 +1,22 @@
 package paint;
 import java.awt.*;
+import java.io.Serializable;
 
-abstract public class Figure {
+abstract public class Figure implements Serializable {
 
-    private Color c;
-    private Point p;
+    protected Color c;
+    protected Point p;
+    protected int width;
+    protected int length;
+    protected Point newOrigin;
 
-    public Figure(Color c, Point p ) {
-        this.c = c;
-        this.p = p;
+    public Figure(Point pt, Color col ) {
+        this.c = col;
+        this.p = pt;
     }
 
 
-    public abstract void setBoundingBox (int heightBB, int widthBB);
+    public abstract void setBoundingBox (int heightBB, int widthBB, Point dragPoint);
     public abstract void draw (Graphics g);
 
     public Color getC() {
