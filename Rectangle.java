@@ -12,29 +12,21 @@ public class Rectangle extends Figure implements Serializable {
     }
 
     @Override
-    public void setBoundingBox(int heightBB, int widthBB, Point dragPoint) {
+    public void setBoundingBox(int heightBB, int widthBB) {
 
-        if(heightBB<0 && widthBB>0){// haut/droite
-            newOrigin = new Point(p.getX(), dragPoint.getY());
-            length = Math.abs(heightBB);
-            width = Math.abs(widthBB);
-        }
-        else if(heightBB<0 && widthBB<0){// haut/gauche
-            newOrigin = new Point(dragPoint.getX(), dragPoint.getY());
-            length = Math.abs(heightBB);
-            width = Math.abs(widthBB);
-        }
-        else if(heightBB>0 && widthBB<0){// bas/gauche
-            newOrigin = new Point(dragPoint.getX(), p.getY());
-            length = Math.abs(heightBB);
-            width = Math.abs(widthBB);
-        }
-        else if(heightBB>0 && widthBB>0){// bas/gauche
-            newOrigin = new Point(p.getX(), p.getY());
-            length = Math.abs(heightBB);
-            width = Math.abs(widthBB);
-        }
+        length = Math.abs(heightBB);
+        width = Math.abs(widthBB);
 
+        int x = p.getX();
+        int y = p.getY();
+
+        if(heightBB<0){
+            y-=length;
+        }
+        if(widthBB<0){
+            x-=width;
+        }
+        newOrigin = new Point(x,y);
     }
     @Override
     public void draw(Graphics g) {

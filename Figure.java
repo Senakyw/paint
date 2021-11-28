@@ -16,7 +16,7 @@ abstract public class Figure implements Serializable {
     }
 
 
-    public abstract void setBoundingBox (int heightBB, int widthBB, Point dragPoint);
+    public abstract void setBoundingBox (int heightBB, int widthBB);
     public abstract void draw (Graphics g);
 
     public Color getC() {

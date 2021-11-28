@@ -11,33 +11,28 @@ public class Circle extends Ellipse implements Serializable {
     }
 
     @Override
-    public void setBoundingBox(int heightBB, int widthBB,Point dragPoint) {
+    public void setBoundingBox(int heightBB, int widthBB) {
         //super.setBoundingBox(heightBB, widthBB);
-        if(Math.abs(heightBB)>Math.abs(widthBB)){
+        if (Math.abs(heightBB) > Math.abs(widthBB)) {
             semiAxysX = Math.abs(heightBB);
             semiAxysY = Math.abs(heightBB);
         }
-        else{
+        else {
             semiAxysX = Math.abs(widthBB);
             semiAxysY = Math.abs(widthBB);
         }
 
-        if(heightBB<0 && widthBB>0){// haut/droite
-            newOrigin = new Point(p.getX(), dragPoint.getY());
-        }
-        else if(heightBB<0 && widthBB<0){// haut/gauche
-            newOrigin = new Point(dragPoint.getX(), dragPoint.getY());
-        }
-        else if(heightBB>0 && widthBB<0){// bas/gauche
-            newOrigin = new Point(dragPoint.getX(), p.getY());
-        }
-        else if(heightBB>0 && widthBB>0){// bas/gauche
-            newOrigin = new Point(p.getX(), p.getY());
-        }
+        int x = p.getX();
+        int y = p.getY();
 
+        if(heightBB<0){
+            y-=semiAxysX;
+        }
+        if(widthBB<0){
+            x-=semiAxysX;
+        }
+        newOrigin = new Point(x,y);
     }
-
-
 
     @Override
     public void draw(Graphics g) {
@@ -52,6 +47,7 @@ public class Circle extends Ellipse implements Serializable {
                 ", semiAxysY=" + semiAxysY +
                 ", c=" + c +
                 ", p=" + p +
+                ", newOrigin=" + newOrigin +
                 '}';
     }
 }

@@ -8,6 +8,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 
@@ -17,8 +18,6 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
     private String nameFigure;
     private int width, height;
     Figure fig;
-    Point dragPoint;
-
 
     public Drawing() {
         super();
@@ -26,7 +25,6 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
         color = Color.black;
         figureList = new ArrayList<Figure>();
         nameFigure = "Rectangle";
-        //fig = null;
         addMouseListener(this);
         addMouseMotionListener(this);
     }
@@ -43,16 +41,13 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
     public void mouseDragged(MouseEvent e) {
         width = e.getX() - fig.p.getX();
         height = e.getY() - fig.p.getY();
-        dragPoint = new Point(e.getX(), e.getY());
-        fig.setBoundingBox(height, width, dragPoint);
+        fig.setBoundingBox(height, width);
         repaint();
     }
-
 
     @Override
     public void mouseMoved(MouseEvent e) {
     }
-
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -74,7 +69,6 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
 
             case "Rectangle":
                 figureList.add(fig = new Rectangle(e.getX(), e.getY(), color));
-                //fig.p = new Point(e.getX(), e.getY());
                 System.out.println("rectangle cree");
                 break;
 
@@ -87,17 +81,14 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
 
     @Override
     public void mouseReleased(MouseEvent e) {
-
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
     }
 
     @Override
@@ -110,7 +101,7 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
     }
 
     public void save() {
-        try {
+        /*try {
             FileOutputStream fos = new FileOutputStream("mondessin");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeInt(figureList.size());
@@ -122,22 +113,30 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
 
         } catch (Exception e) {
             System.out.println("Impossible de sauvegarder");
-        }
+        }*/
+        /*BufferedImage image2 = new BufferedImage(this.WIDTH, this.HEIGHT, BufferedImage.TYPE_INT_RGB);
+        JFileChooser jFile = new JFileChooser();
+        jFile.showSaveDialog(null);
+        Path pth = jFile.getSelectedFile().toPath();
+        JOptionPane.showMessageDialog(null, pth.toString());
+        //Graphics2D graphics2D = image2.createGraphics();
+        try {
+            ImageIO.write(image2, "", new File(pth.toString()));
+        } catch (IOException ox) {
+            System.out.println("Impossible de sauvegarder");
+            ox.printStackTrace();
 
-
-        /*try {
-            FileOutputStream output = new FileOutputStream("FileName");
-            ObjectOutputStream objectOutput = new ObjectOutputStream(output);
-            objectOutput.writeObject(figureList);
-            objectOutput.close();
-            System.out.println("\nSaved\n");
-        } catch (Exception e) {
-            System.out.println("The file could not be saved");
-            e.printStackTrace();
         }*/
 
-
-
+    BufferedImage image2 = new BufferedImage(this.WIDTH, this.HEIGHT, BufferedImage.TYPE_INT_RGB);
+    Graphics g = image2.createGraphics();
+    this.paint(g);
+    try {
+        ImageIO.write(image2, "png", new File("filename.png"));
+    } catch (IOException ex) {
+        ex.printStackTrace();
     }
+    }
+
 }
 

@@ -1,17 +1,24 @@
 package paint;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.io.Serializable;
+import java.nio.file.Path;
 
-public class Window extends JFrame implements ActionListener {
+public class Window extends JFrame implements ActionListener, Serializable {
     Drawing Draw = new Drawing();
-    public Window(String Title, int x, int y){
+
+    public Window(String Title, int x, int y) {
         super(Title);
-        this.setSize(x,y);
+        this.setSize(x, y);
         //this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //this.setBackground(Color.white);
@@ -43,7 +50,7 @@ public class Window extends JFrame implements ActionListener {
         JPanel southPanel = new JPanel();
         contentPanel.add(southPanel, "South");
 
-        southPanel.setLayout(new GridLayout(1,2));
+        southPanel.setLayout(new GridLayout(1, 2));
 
         JButton noir = new JButton("Noir");
         southPanel.add(noir);
@@ -77,7 +84,7 @@ public class Window extends JFrame implements ActionListener {
         southPanel.add(cercle);
         cercle.addActionListener(this);
 
-        southPanel.setLayout(new GridLayout(2,1));
+        southPanel.setLayout(new GridLayout(2, 1));
 
         JButton jaune = new JButton("Jaune");
         southPanel.add(jaune);
@@ -113,64 +120,64 @@ public class Window extends JFrame implements ActionListener {
     }
 
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
 
         String cmd = e.getActionCommand();
 
-        switch (cmd){
+        switch (cmd) {
 
-            case"Noir":
+            case "Noir":
                 Draw.setColor(Color.black);
                 break;
-            case"Rouge":
+            case "Rouge":
                 Draw.setColor(Color.red);
                 break;
-            case"Vert":
+            case "Vert":
                 Draw.setColor(Color.green);
                 break;
-            case"Bleu":
+            case "Bleu":
                 Draw.setColor(Color.blue);
                 break;
-            case"Jaune":
+            case "Jaune":
                 Draw.setColor(Color.yellow);
                 break;
-            case"Rose":
+            case "Rose":
                 Draw.setColor(Color.pink);
                 break;
-            case"Magenta":
+            case "Magenta":
                 Draw.setColor(Color.magenta);
                 break;
-            case"Orange":
+            case "Orange":
                 Draw.setColor(Color.orange);
                 System.out.println("Orange");
                 break;
-            case"Ellipse":
+            case "Ellipse":
                 Draw.setNameFigure("Ellipse");
                 break;
-            case"Cercle":
+            case "Cercle":
                 Draw.setNameFigure("Cercle");
                 break;
-            case"Rectangle":
+            case "Rectangle":
                 Draw.setNameFigure("Rectangle");
                 break;
-            case"Carre":
+            case "Carre":
                 System.out.println("carre");
                 Draw.setNameFigure("Carre");
                 break;
-            case"Auteur":
+            case "Auteur":
                 JOptionPane info = new JOptionPane();
                 info.showInternalMessageDialog(info, "      Author : Lavan", "information", JOptionPane.INFORMATION_MESSAGE);
                 break;
-            case "Save" :
+            case "Save":
                 Draw.save();
                 break;
 
             case "Quit":
                 System.exit(0);
                 break;
-        }
 
+
+        }
     }
 }

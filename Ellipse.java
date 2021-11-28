@@ -13,30 +13,21 @@ public class Ellipse extends Figure implements Serializable {
     }
 
     @Override
-    public void setBoundingBox(int heightBB, int widthBB, Point dragPoint) {
+    public void setBoundingBox(int heightBB, int widthBB) {
 
+        semiAxysY = Math.abs(heightBB);
+        semiAxysX = Math.abs(widthBB);
 
-        if(heightBB<0 && widthBB>0){// haut/droite
-            newOrigin = new Point(p.getX(), dragPoint.getY());
-            semiAxysY = Math.abs(heightBB);
-            semiAxysX = Math.abs(widthBB);
-        }
-        else if(heightBB<0 && widthBB<0){// haut/gauche
-            newOrigin = new Point(dragPoint.getX(), dragPoint.getY());
-            semiAxysY = Math.abs(heightBB);
-            semiAxysX = Math.abs(widthBB);
-        }
-        else if(heightBB>0 && widthBB<0){// bas/gauche
-            newOrigin = new Point(dragPoint.getX(), p.getY());
-            semiAxysY = Math.abs(heightBB);
-            semiAxysX = Math.abs(widthBB);
-        }
-        else if(heightBB>0 && widthBB>0){// bas/gauche
-            newOrigin = new Point(p.getX(), p.getY());
-            semiAxysY = Math.abs(heightBB);
-            semiAxysX = Math.abs(widthBB);
-        }
+        int x = p.getX();
+        int y = p.getY();
 
+        if(heightBB<0){
+            y-=semiAxysY;
+        }
+        if(widthBB<0){
+            x-=semiAxysX;
+        }
+        newOrigin = new Point(x,y);
 
     }
 
@@ -58,3 +49,4 @@ public class Ellipse extends Figure implements Serializable {
                 '}';
     }
 }
+//

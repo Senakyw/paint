@@ -11,7 +11,7 @@ public class Square extends Rectangle implements Serializable {
     }
 
     @Override
-    public void setBoundingBox(int heightBB, int widthBB, Point dragPoint) {
+    public void setBoundingBox(int heightBB, int widthBB) {
 
         if (Math.abs(heightBB) > Math.abs(widthBB) ){
             width = Math.abs(heightBB);
@@ -21,22 +21,21 @@ public class Square extends Rectangle implements Serializable {
             width = Math.abs(widthBB);
         }
 
-        if(heightBB<0 && widthBB>0){// haut/droite
-            newOrigin = new Point(p.getX(), dragPoint.getY());
+        int x = p.getX();
+        int y = p.getY();
+
+        if(heightBB<0){
+            y-=length;
         }
-        else if(heightBB<0 && widthBB<0){// haut/gauche
-            newOrigin = new Point(dragPoint.getX(), dragPoint.getY());
+        if(widthBB<0){
+            x-=length;
         }
-        else if(heightBB>0 && widthBB<0){// bas/gauche
-            newOrigin = new Point(dragPoint.getX(), p.getY());
-        }
-        else if(heightBB>0 && widthBB>0){// bas/gauche
-            newOrigin = new Point(p.getX(), p.getY());
-        }
+        newOrigin = new Point(x,y);
     }
 
     @Override
     public void draw(Graphics g) {
+
         g.setColor(c);
         g.fillRect(newOrigin.getX(), newOrigin.getY(), width, length);
     }
