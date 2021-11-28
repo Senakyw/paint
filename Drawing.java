@@ -101,41 +101,24 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
     }
 
     public void save() {
-        /*try {
-            FileOutputStream fos = new FileOutputStream("mondessin");
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeInt(figureList.size());
-            System.out.println(figureList.size());
-            for(Figure f : figureList){
-                oos.writeObject(f);
-            }
-            oos.close();
 
-        } catch (Exception e) {
-            System.out.println("Impossible de sauvegarder");
-        }*/
-        /*BufferedImage image2 = new BufferedImage(this.WIDTH, this.HEIGHT, BufferedImage.TYPE_INT_RGB);
+        JOptionPane.showMessageDialog(null,"format du fichier : png");
+
+        BufferedImage capture = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
+        this.paint(capture.getGraphics());
+
         JFileChooser jFile = new JFileChooser();
         jFile.showSaveDialog(null);
         Path pth = jFile.getSelectedFile().toPath();
+
         JOptionPane.showMessageDialog(null, pth.toString());
-        //Graphics2D graphics2D = image2.createGraphics();
+
         try {
-            ImageIO.write(image2, "", new File(pth.toString()));
-        } catch (IOException ox) {
-            System.out.println("Impossible de sauvegarder");
-            ox.printStackTrace();
-
-        }*/
-
-    BufferedImage image2 = new BufferedImage(this.WIDTH, this.HEIGHT, BufferedImage.TYPE_INT_RGB);
-    Graphics g = image2.createGraphics();
-    this.paint(g);
-    try {
-        ImageIO.write(image2, "png", new File("filename.png"));
-    } catch (IOException ex) {
-        ex.printStackTrace();
-    }
+            ImageIO.write(capture, "png", new File(pth.toString()+".png"));
+        } catch (IOException o) {
+            System.out.println("impossible de sauvegarder");
+            o.printStackTrace();
+        }
     }
 
 }
