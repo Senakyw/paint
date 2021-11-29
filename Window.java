@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.nio.file.Path;
+import java.util.ArrayList;
 
 public class Window extends JFrame implements ActionListener, Serializable {
     Drawing Draw = new Drawing();
@@ -29,16 +30,22 @@ public class Window extends JFrame implements ActionListener, Serializable {
         JMenuBar m = new JMenuBar();
         this.setJMenuBar(m);
         JMenu menu1 = new JMenu("File");
+
         JMenuItem open = new JMenuItem("Open");
         menu1.add(open);
+
         JMenuItem nw = new JMenuItem("New");
         menu1.add(nw);
+        nw.addActionListener(this);
+
         JMenuItem save = new JMenuItem("Save");
         menu1.add(save);
         save.addActionListener(this);
+
         JMenuItem quit = new JMenuItem("Quit");
         menu1.add(quit);
         quit.addActionListener(this);
+
         m.add(menu1);
 
         JMenu propros = new JMenu("A propros");
@@ -172,12 +179,12 @@ public class Window extends JFrame implements ActionListener, Serializable {
             case "Save":
                 Draw.save();
                 break;
-
             case "Quit":
                 System.exit(0);
                 break;
-
-
+            case "New":
+                Draw.setFigureList(new ArrayList<Figure>());
+                break;
         }
     }
 }

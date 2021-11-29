@@ -29,6 +29,10 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
         addMouseMotionListener(this);
     }
 
+    public void setFigureList(ArrayList<Figure> figureList) {
+        this.figureList = figureList;
+    }
+
     public void setColor(Color color) {
         this.color = color;
     }
@@ -102,7 +106,7 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
 
     public void save() {
 
-        JOptionPane.showMessageDialog(null,"format du fichier : png");
+        JOptionPane.showMessageDialog(null, "format du fichier : png");
 
         BufferedImage capture = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
         this.paint(capture.getGraphics());
@@ -114,12 +118,30 @@ public class Drawing extends JPanel implements MouseMotionListener, MouseListene
         JOptionPane.showMessageDialog(null, pth.toString());
 
         try {
-            ImageIO.write(capture, "png", new File(pth.toString()+".png"));
+            ImageIO.write(capture, "png", new File(pth.toString() + ".png"));
         } catch (IOException o) {
             System.out.println("impossible de sauvegarder");
             o.printStackTrace();
         }
     }
 
-}
+    public void open () {
+
+        BufferedImage image;
+        JFileChooser jFile = new JFileChooser();
+        jFile.showSaveDialog(null);
+        Path pth = jFile.getSelectedFile().toPath();
+        JOptionPane.showMessageDialog(null, pth.toString());
+
+        try {
+                image = ImageIO.read(new File(pth.toString()));
+            } catch (IOException ex) {
+            }
+        }
+
+
+
+    }
+
+
 
