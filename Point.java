@@ -4,6 +4,7 @@ public class Point {
     private int x;
     private int y;
 
+    //Constructeur
     public Point() {
         x= 0;
         y= 0;
@@ -14,6 +15,7 @@ public class Point {
         this.y = y;
     }
 
+    //Méthode
     public int getX() {
         return x;
     }

@@ -15,8 +15,8 @@ abstract public class Figure implements Serializable {
         this.p = pt;
     }
 
-
-    public abstract void setBoundingBox (int heightBB, int widthBB);
+    //Abstracts methods to override in the classes that will inherit Figure
+    public abstract void setBoundingBox (int heightBB, int widthBB);//Drawing limits
     public abstract void draw (Graphics g);
 
     public Color getC() {
