@@ -14,7 +14,7 @@ public class Square extends Rectangle implements Serializable {
     public void setBoundingBox(int heightBB, int widthBB) {
 
         if (Math.abs(heightBB) > Math.abs(widthBB) ){
-            width = Math.abs(heightBB);
+            width = Math.abs(heightBB);//taking the biggest value
             length = Math.abs(heightBB);
         } else {
             length = Math.abs(widthBB);
@@ -38,6 +38,7 @@ public class Square extends Rectangle implements Serializable {
 
         g.setColor(c);
         g.fillRect(newOrigin.getX(), newOrigin.getY(), width, length);
+        //Method from the graphics class
     }
 
     @Override

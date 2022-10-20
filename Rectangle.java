@@ -7,8 +7,8 @@ public class Rectangle extends Figure implements Serializable {
     protected int width =0, length = 0;
 
     public Rectangle(int px, int py,Color c) {
-        super(new Point(px,py), c);
-        newOrigin = new Point();
+        super(new Point(px,py), c);//call the construtor of Figure
+        newOrigin = new Point();//Start point on the window
     }
 
     @Override
@@ -17,22 +17,22 @@ public class Rectangle extends Figure implements Serializable {
         length = Math.abs(heightBB);
         width = Math.abs(widthBB);
 
-        int x = p.getX();
+        int x = p.getX(); //local variable in order to create new point
         int y = p.getY();
 
-        if(heightBB<0){
+        if(heightBB<0){//Solution for negative boundingBox
             y-=length;
         }
         if(widthBB<0){
             x-=width;
         }
-        newOrigin = new Point(x,y);
+        newOrigin = new Point(x,y);// Create new point even if boundingBox's area is positive
     }
     @Override
-    public void draw(Graphics g) {
+    public void draw(Graphics g) {//Method which enable to draw the figure
         g.setColor(c);
         g.fillRect(newOrigin.getX(), newOrigin.getY(), width, length);
-
+        //Method from the graphics class
     }
 
     @Override
